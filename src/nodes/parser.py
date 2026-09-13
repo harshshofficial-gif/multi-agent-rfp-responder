@@ -3,7 +3,7 @@ from typing import List
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Import our schemas
 from schemas import RFPRequirement, RFPState
@@ -54,7 +54,7 @@ extraction_prompt = ChatPromptTemplate.from_messages([
 ])
 
 # Initialize LLM with structured output
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.0)
+llm = ChatGoogleGenerativeAI(model="gemini-3.6-flash", temperature=0.0)
 structured_llm = llm.with_structured_output(ExtractedRequirements)
 extraction_chain = extraction_prompt | structured_llm
 
